@@ -18,8 +18,8 @@ export default function App() {
         <Stack.Screen name="Page1" component={Page1} />
         <Stack.Screen name="Page2" component={Page2} />
         <Stack.Screen name="Page3" component={Page3} />
-        <MoodGraph />
       </Stack.Navigator>
+      <MoodGraph />
       <NavBar />
     </NavigationContainer>
   );
