@@ -1,5 +1,6 @@
 # One Step Closer
- 
+
+![preview](/client/assets/osc_preview.png)
 
 # Features:
 * Has features!
@@ -42,7 +43,7 @@
 
 ## 3 - Run the Project
 
-* Create a virtual environment for the project. This can be named anything (though `venv` is common) and can be stored anywhere (storing it in the `ice_cream_shop` directory is acceptable, but make sure it is excepted in the gitignore if pushing changes to GitHub). For more information on virtual environments, refer to the [official Python documentation](https://docs.python.org/3/tutorial/venv.html). 
+* Create a virtual environment for the project. This can be named anything (though `venv` is common) and can be stored anywhere (storing it in the `one-step-closer` directory is acceptable, but make sure it is excepted in the gitignore if pushing changes to GitHub). For more information on virtual environments, refer to the [official Python documentation](https://docs.python.org/3/tutorial/venv.html). 
   ```bash
   cd one_step_closer
   python -m venv venv
@@ -59,7 +60,7 @@
     source venv/bin/activate
     ```
 
-* Install the requirements from the ice_cream_shop root directory:
+* Install the requirements from the one-step-closer root directory:
   ```bash
   pip install -r requirements.txt
   ```
