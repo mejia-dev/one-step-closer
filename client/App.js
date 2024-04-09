@@ -3,6 +3,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import MoodGraph from "./src/components/MoodGraph"
+import ProgressGraph from "./src/components/ProgressGraph"
 import NavBar from './src/components/NavBar';
 import Page1 from './src/components/page1';
 import Page2 from './src/components/page2';
@@ -19,7 +20,8 @@ export default function App() {
         <Stack.Screen name="Page2" component={Page2} />
         <Stack.Screen name="Page3" component={Page3} />
       </Stack.Navigator>
-      <MoodGraph />
+      {/* <MoodGraph /> */}
+      <ProgressGraph />
       <NavBar />
     </NavigationContainer>
   );
