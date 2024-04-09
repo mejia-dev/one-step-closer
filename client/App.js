@@ -17,12 +17,12 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Landing Page" component={Landing}
           options={{ headerShown: false }} />
-        <Stack.Screen name="Page1" component={Page1} />
+        {/* <Stack.Screen name="Page1" component={Page1} />
         <Stack.Screen name="Page2" component={Page2} />
-        <Stack.Screen name="Page3" component={Page3} />
+        <Stack.Screen name="Page3" component={Page3} /> */}
       </Stack.Navigator>
-      <MoodGraph />
-      <NavBar />
+      {/* <MoodGraph />
+      <NavBar /> */}
     </NavigationContainer>
   );
 }
