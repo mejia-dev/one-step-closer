@@ -9,3 +9,4 @@ venv/
 
 # sqlite database (not used in favor of MySQL)
 *.sqlite3
+node_modules

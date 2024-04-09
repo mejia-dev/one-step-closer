@@ -11,6 +11,18 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+googleauth_id = os.getenv("GOOGLE_OAUTH2_ID")
+googleauth_secret = os.getenv("GOOGLE_OAUTH2_SECRET")
+dbconfig_name = os.getenv("DBCONFIG_NAME")
+dbconfig_user = os.getenv("DBCONFIG_USER")
+dbconfig_password = os.getenv("DBCONFIG_PASSWORD")
+dbconfig_host = os.getenv("DBCONFIG_HOST")
+dbconfig_port = os.getenv("DBCONFIG_PORT")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,6 +42,14 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,6 +57,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +72,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'osc_backend.urls'
@@ -74,9 +101,13 @@ WSGI_APPLICATION = 'osc_backend.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": dbconfig_name,
+        "USER": dbconfig_user,
+        "PASSWORD": dbconfig_password,
+        "HOST": dbconfig_host,
+        "PORT": dbconfig_port,
     }
 }
 
@@ -105,7 +136,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Los_Angeles'
 
 USE_I18N = True
 
@@ -121,3 +152,14 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': googleauth_id,
+            'secret': googleauth_secret,
+            'key': ''
+        }
+    }
+}
