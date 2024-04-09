@@ -16,7 +16,7 @@ import os
 
 load_dotenv()
 
-googleauth_key = os.getenv("GOOGLE_OAUTH2_KEY")
+googleauth_id = os.getenv("GOOGLE_OAUTH2_ID")
 googleauth_secret = os.getenv("GOOGLE_OAUTH2_SECRET")
 dbconfig_name = os.getenv("DBCONFIG_NAME")
 dbconfig_user = os.getenv("DBCONFIG_USER")
@@ -152,3 +152,14 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': googleauth_id,
+            'secret': googleauth_secret,
+            'key': ''
+        }
+    }
+}
