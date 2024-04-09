@@ -10,14 +10,14 @@
 #### Step 1: Clone Repo
 * Clone this repository by running the following command from in the Git Bash terminal:
   ```bash
-   git clone https://github.com/mejia-dev/one_step_closer.git
+   git clone https://github.com/mejia-dev/one-step-closer.git
    ```
 
 #### Step 2: .env Setup
 * This project requires a file titled `.env` residing in the project directory (not the root directory).
   * Navigate to the project directory:
     ```bash
-    cd one_step_closer/osc_backend
+    cd one-step-closer/osc_backend
     ```
   * Create the file:
     ```bash
@@ -36,7 +36,7 @@
       from django.core.management.utils import get_random_secret_key
       print(get_random_secret_key())
       ```
-  * Save the key in `.env`.
+  * Save the key in `.env` as `SECRET_KEY`.
   * In `settings.py`, change `DEBUG` to False and set `SECRET_KEY = os.getenv("SECRET_KEY")`.
 
 
@@ -45,7 +45,7 @@
 
 * Create a virtual environment for the project. This can be named anything (though `venv` is common) and can be stored anywhere (storing it in the `one-step-closer` directory is acceptable, but make sure it is excepted in the gitignore if pushing changes to GitHub). For more information on virtual environments, refer to the [official Python documentation](https://docs.python.org/3/tutorial/venv.html). 
   ```bash
-  cd one_step_closer
+  cd one-step-closer
   python -m venv venv
   ```
 
@@ -85,7 +85,7 @@
 
 * none
 
-If a bug has been discovered, please add it to the [Issues tracker](https://github.com/mejia-dev/one_step_closer/issues).
+If a bug has been discovered, please add it to the [Issues tracker](https://github.com/mejia-dev/one-step-closer/issues).
 
 
 ## License
