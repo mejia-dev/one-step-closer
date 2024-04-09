@@ -4,8 +4,6 @@ import { LineChart } from "react-native-chart-kit"
 
 const MoodGraph = () => {
     return (
-
-
         <View style={styles.chartContainer}>
             <LineChart
                 data={{
