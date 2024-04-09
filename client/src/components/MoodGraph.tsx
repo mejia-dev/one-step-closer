@@ -2,14 +2,12 @@ import { View, Dimensions, StyleSheet } from 'react-native'
 import { LineChart } from "react-native-chart-kit"
 
 
-export const MoodGraph = () => {
+const MoodGraph = () => {
     return (
-
-
         <View style={styles.chartContainer}>
             <LineChart
                 data={{
-                    labels: ["January", "February", "March", "April", "May", "June"],
+                    labels: ["Check in 1", "Check in 2", "Check in 3", "Check in 4", "Check in 5", "Check in 6"],
                     datasets: [
                         {
                             data: [0, 5, 10, 3, 20, 7],
