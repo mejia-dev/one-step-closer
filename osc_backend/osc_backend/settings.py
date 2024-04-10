@@ -63,7 +63,10 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 
-    'userinfo.apps.UserinfoConfig'
+    'userinfo.apps.UserinfoConfig',
+
+    'rest_framework',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -76,7 +79,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     "allauth.account.middleware.AccountMiddleware",
+
+    "corsheaders.middleware.CorsMiddleware"
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES':[
+        'rest_framework.permissions.AllowAny']}
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'osc_backend.urls'
 
