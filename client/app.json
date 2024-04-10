@@ -15,9 +15,20 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.osc.onestepcloserclient",
+      "supportsTablet": true,
+      "infoPlist": {
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": [
+              "com.googleusercontent.apps.678689395675-e8pfrher8h6qp2pttibf8q6gaf6n2q50"
+            ]
+          }
+        ]
+      }
     },
     "android": {
+      "package": "com.osc.onestepcloserclient",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -27,12 +38,20 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
+      "@react-native-google-signin/google-signin",
       [
         "expo-font",
         {
-          "fonts": ["node_modules/@expo-google-fonts/inter/Inter_100Thin.ttf"]
+          "fonts": [
+            "node_modules/@expo-google-fonts/inter/Inter_100Thin.ttf"
+          ]
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "6dfb3f5d-a204-4285-86c1-d2a7ae17f63a"
+      }
+    }
   }
 }
