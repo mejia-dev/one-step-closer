@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts } from 'expo-font';
+import MaskedView from '@react-native-masked-view/masked-view';
 
 const Landing = () => {
   let [fontsLoaded] = useFonts({
@@ -9,13 +10,14 @@ const Landing = () => {
     'Museo-Bold': require('../assets/fonts/MuseoModerno-Bold.ttf'),
     'Museo-ExtraBold': require('../assets/fonts/MuseoModerno-ExtraBold.ttf'),
     'Jost': require('../assets/fonts/Jost-Regular.ttf')
-  })
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <View style={styles.container}>
-      <LinearGradient colors={['rgba(240, 253, 255, 1)', 'rgba(139, 157, 255, 1)']} style={styles.background} />
-      <Text style={styles.headerFont}>One</Text>
-      <Text style={styles.headerFont}>Step</Text>
-      <Text style={styles.headerFont}>Closer</Text>
+      <LinearGradient colors={['#F0FDFF', '#8B9DFF']} style={styles.background} />
     </View>
   );
 }
@@ -35,10 +37,5 @@ const styles = StyleSheet.create({
     top: 0,
     height: '100%',
   },
-  headerFont: {
-    fontFamily: 'Museo-Extrabold', 
-    fontSize: 64,
-    color: 'rgba(0, 89, 101, 1)',
-    lineHeight: 60
-  }
-})
+  
+});
