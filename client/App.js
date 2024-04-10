@@ -23,7 +23,7 @@ export default function App() {
         <Stack.Screen name="Page3" component={Page3} />
       </Stack.Navigator>
       {/* <MoodGraph /> */}
-      <ProgressGraph />
+      {/*<ProgressGraph /> */}
       <NavBar />
     </NavigationContainer>
   );
