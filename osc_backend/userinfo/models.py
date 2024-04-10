@@ -13,9 +13,13 @@ class Mood(models.Model):
 class Goal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     goal_date = models.DateField(auto_now_add=True)
-    goal_name = models.TextField(max_length=250)
-    goal_time = models.IntegerField(default=1)
-    goal_time_progress = models.IntegerField(default=0)
+    screen_goal = models.FloatField(default=3)
+    meditation_goal = models.IntegerField(default=10)
+    excercise_goal = models.FloatField(default=1)
+    screen_time = models.IntegerField(default=0)
+    meditation_time = models.IntegerField(default=0)
+    excercise_time = models.IntegerField(default=0)
+
     def __str__(self):
-        return self.goal_name
+        return self.goal_date
 

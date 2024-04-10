@@ -4,4 +4,4 @@ from .models import *
 class ReactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Goal
-        fields = ['user', 'goal_date', 'goal_name', 'goal_time', 'goal_time_progress']
+        fields = ['user', 'goal_date', 'screen_goal', 'meditation_goal', 'excercise_goal', 'screen_time', 'meditation_time', 'excercise_time']
