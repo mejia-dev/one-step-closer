@@ -7,6 +7,7 @@ import Landing from './src/components/Landing';
 import GoalSetup from './src/components/GoalSetup';
 import NotificationSetup from './src/components/NotificationSetup';
 import Dashboard from './src/components/Dashboard';
+import History from './src/components/History';
 
 const Stack = createStackNavigator();
 
@@ -21,7 +22,9 @@ export default function App() {
         {/*<Stack.Screen name="Notification Setup" component={NotificationSetup}
           options={{ headerShown: false }} />
         </Stack.Navigator>*/}
-        <Stack.Screen name="Dashboard" component={Dashboard}
+        {/*<Stack.Screen name="Dashboard" component={Dashboard}
+          options={{ headerShown: false }} />*/}
+        <Stack.Screen name="History" component={History}
           options={{ headerShown: false }} />
         </Stack.Navigator>
       {/* <MoodGraph /> */}
