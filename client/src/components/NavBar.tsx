@@ -9,18 +9,34 @@ const NavBar = () => {
     navigation.navigate(screenName);
   };
 
-  return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => handlePress('Page1')} style={styles.navItem}>
-        <Text>1</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => handlePress('Page2')} style={styles.navItem}>
-        <Text>2</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => handlePress('Page3')} style={styles.navItem}>
-        <Text>3</Text>
-      </TouchableOpacity>
-    </View>
+  return React.createElement(
+    View,
+    { style: styles.container },
+    React.createElement(
+      TouchableOpacity,
+      { onPress: () => handlePress('Page1'), style: styles.navItem },
+      React.createElement(Text, null, 'image for Page1')
+    ),
+    React.createElement(
+      TouchableOpacity,
+      { onPress: () => handlePress('Page2'), style: styles.navItem },
+      React.createElement(Text, null, 'image for page2')
+    ),
+    React.createElement(
+      TouchableOpacity,
+      { onPress: () => handlePress('Page3'), style: styles.navItem },
+      React.createElement(Text, null, 'image for Page3')
+    ),
+    // React.createElement(
+    //   TouchableOpacity,
+    //   { onPress: () => handlePress('ProgressGraph'), style: styles.navItem },
+    //   React.createElement(Text, null, 'image for ProgressGraph')
+    // ),
+    // React.createElement(
+    //   TouchableOpacity,
+    //   { onPress: () => handlePress('MoodGraph'), style: styles.navItem },
+    //   React.createElement(Text, null, 'image for MoodGraph')
+    // )
   );
 };
 
