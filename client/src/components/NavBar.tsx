@@ -1,25 +1,19 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 const NavBar = () => {
-  const navigation = useNavigation();
 
-  const handlePress = (screenName) => {
-    navigation.navigate(screenName);
-  };
+  let dashboard = require("../assets/img/dashboard-icon.png");
+  let history = require("../assets/img/history-icon.png");
+  let settings = require("../assets/img/settings-icon.png");
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => handlePress('Page1')} style={styles.navItem}>
-        <Text>1</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => handlePress('Page2')} style={styles.navItem}>
-        <Text>2</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => handlePress('Page3')} style={styles.navItem}>
-        <Text>3</Text>
-      </TouchableOpacity>
+      <Image source={dashboard} />
+      <Image source={history} />
+      <Image source={settings} />
     </View>
   );
 };
@@ -27,9 +21,10 @@ const NavBar = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    backgroundColor: '#ccc',
-    padding: 10,
+    justifyContent: 'space-around',
+    backgroundColor: '#00365C',
+    paddingTop: 18,
+    paddingBottom: 32,
     position: 'absolute',
     bottom: 0,
     left: 0,
