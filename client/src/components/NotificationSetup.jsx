@@ -10,7 +10,7 @@ import {
 } from '@expo-google-fonts/museomoderno';
 import { Jost_400Regular } from '@expo-google-fonts/jost';
 
-const GoalSetup = () => {
+const NotificationSetup = () => {
   let [fontsLoaded] = useFonts({
     MuseoModerno_600SemiBold,
     MuseoModerno_700Bold,
@@ -26,25 +26,29 @@ const GoalSetup = () => {
   return (
     <View style={styles.container}>
       <LinearGradient colors={['#F0FDFF', '#8B9DFF']} style={styles.background} />
-      <Text style={[styles.title, styles.jost]}>Let's set up your goals</Text>
+      <Text style={[styles.title, styles.jost]}>Let's set up notifications</Text>
       <View style={styles.boxes}>
         <View style={styles.box}>
-          <Text style={[styles.time, styles.jost]}>Screen time:</Text>
-          <Text style={[styles.amount, styles.museo]}>3 <Text style={styles.unit}>hours</Text></Text>
+          <Text style={[styles.time, styles.jost]}>Wake up time:</Text>
+          <Text style={[styles.amount, styles.museo]}>07:00 <Text style={styles.unit}>am</Text></Text>
         </View>
         <View style={styles.box}>
-        <Text style={[styles.time, styles.jost]}>Exercise time:</Text>
-          <Text style={[styles.amount, styles.museo]}>1 <Text style={styles.unit}>hour</Text></Text>
+        <Text style={[styles.time, styles.jost]}>Bed time:</Text>
+          <Text style={[styles.amount, styles.museo]}>10:00 <Text style={styles.unit}>pm</Text></Text>
         </View>
         <View style={styles.box}>
-          <Text style={[styles.time, styles.jost]}>Meditation time:</Text>
-          <Text style={[styles.amount, styles.museo]}>30 <Text style={styles.unit}>mins</Text></Text>
+          <Text style={[styles.time, styles.jost]}>Reminder Notification:</Text>
+          <Text style={[styles.amount, styles.museo]}>12:00 <Text style={styles.unit}>pm</Text></Text>
         </View>
-        <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 18 }}>
-          <Image source={icon} style={styles.icon}/>
+        <View style={styles.box}>
+          <Text style={[styles.time, styles.jost]}>End-of-day Notification:</Text>
+          <Text style={[styles.amount, styles.museo]}>09:50 <Text style={styles.unit}>pm</Text></Text>
         </View>
       </View>
       <View style={styles.buttonContainer}>
+        <View style={styles.button}>
+          <Text style={[styles.buttonText]}>Back</Text>
+        </View>
         <View style={styles.button}>
           <Text style={[styles.buttonText]}>Next</Text>
         </View>
@@ -53,7 +57,7 @@ const GoalSetup = () => {
   );
 }
 
-export default GoalSetup;
+export default NotificationSetup;
 
 const styles = StyleSheet.create({
   container: {
@@ -94,21 +98,23 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderWidth: .75,
     borderRadius: 12,
-    margin: 12
+    margin: 10
   },
   amount: {
     fontSize: 32,
-    marginLeft: 140,
-    marginTop: 8,
+    marginLeft: 100,
+    marginTop: 2,
     textAlign: 'right'
   },
   unit: {
     fontSize: 14
   },
   buttonContainer: {
-    height: '12%',
     display: 'flex',
+    flexDirection: 'row',
     justifyContent: 'flex-end',
+    gap: 100,
+    marginTop: 48
   },
   button: {
     paddingTop: 6,

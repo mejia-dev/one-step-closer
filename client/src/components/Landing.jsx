@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import MaskedView from '@react-native-masked-view/masked-view';
 import AppLoading from 'expo-app-loading';
@@ -22,6 +22,8 @@ const Landing = () => {
     return <AppLoading />;
   }
 
+  let img = require("../assets/img/landing-img.png");
+
   return (
     <View style={styles.container}>
       <LinearGradient colors={['#F0FDFF', '#8B9DFF']} style={styles.background} />
@@ -43,6 +45,7 @@ const Landing = () => {
         </MaskedView>
       </View>
       <View style={styles.subTextContainer}>
+        <Image source={img} style={styles.image}/>
         <Text style={styles.subText}>to your daily health goal</Text>
       </View>
       <View style={styles.buttonContainer}>
@@ -84,9 +87,12 @@ const styles = StyleSheet.create({
     minHeight: 'fit-content',
     paddingTop: 80,
   },
+  image: {
+    width: 'fit-content',
+    resizeMode: 'contain'
+  },
   subTextContainer: {
-    width: '70%',
-    paddingTop: 16
+    width: '72%',
   },
   subText: {
     fontFamily: 'Jost_400Regular',
@@ -94,9 +100,11 @@ const styles = StyleSheet.create({
     letterSpacing: .5,
     fontSize: 16,
     textAlign: 'right',
-    textShadowColor: 'gray',
+    textShadowColor: 'rgba(0, 0, 0, 0.25)',
     textShadowOffset: {width: 2, height: 2},
-    textShadowRadius: 4
+    textShadowRadius: 4,
+    paddingTop: 6,
+    paddingRight: 6
   },
   buttonContainer: {
     height: '28%',
