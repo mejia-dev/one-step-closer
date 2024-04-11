@@ -24,9 +24,10 @@ export default function AuthNavigator() {
        {user ? ( 
           <>
             <Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }} />
+            
             <Stack.Screen name="Goal Setup" component={GoalSetup} options={{ headerShown: false }} />
            
-            <Stack.Screen name="ProgressGraph" component={ProgressGraph} options={{ headerShown: false }} />
+            <Stack.Screen name="Progress Graph" component={ProgressGraph} options={{ headerShown: false }} />
             
             <Stack.Screen name="Notification Setup" component={NotificationSetup} options={{ headerShown: false }} />
             </>
