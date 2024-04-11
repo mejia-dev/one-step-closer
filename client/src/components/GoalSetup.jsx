@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import NavBar from './NavBar';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; 
 import { LinearGradient } from 'expo-linear-gradient';
 import AppLoading from 'expo-app-loading';
 import {
@@ -12,6 +12,7 @@ import {
 import { Jost_400Regular } from '@expo-google-fonts/jost';
 
 const GoalSetup = () => {
+  const navigation = useNavigation();
   let [fontsLoaded] = useFonts({
     MuseoModerno_600SemiBold,
     MuseoModerno_700Bold,
@@ -23,6 +24,10 @@ const GoalSetup = () => {
   }
 
   let icon = require("../assets/img/plus-icon.png");
+
+  const navigateToNotificationSetup = () => {
+    navigation.navigate('NotificationSetup');
+  };
 
   return (
     <View style={styles.container}>
@@ -46,11 +51,10 @@ const GoalSetup = () => {
         </View>
       </View>
       <View style={styles.buttonContainer}>
-        <View style={styles.button}>
-          <Text style={[styles.buttonText]}>Next</Text>
-        </View>
+        <TouchableOpacity style={styles.button} onPress={navigateToNotificationSetup}>
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
       </View>
-      <NavBar />
     </View>
   );
 }

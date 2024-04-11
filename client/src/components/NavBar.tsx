@@ -14,7 +14,7 @@ const NavBar = () => {
     navigation.navigate('Dashboard');
   };
   const navigateToProgressGraph = () => {
-    navigation.navigate('Progress Graph');
+    navigation.navigate('ProgressGraph');
   };
 
 
