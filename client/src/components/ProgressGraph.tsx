@@ -49,24 +49,26 @@ const ProgressGraph = () => {
     }
 
     const chartConfig = {
-        backgroundGradientFrom: "#F0FDFF",
-        backgroundGradientTo: "#F0FDFF",
+        backgroundGradientFrom: "none",
+        backgroundGradientTo: "none",
         color: (opacity = 2) => `rgba(0, 88, 151, ${opacity})`,
         strokeWidth: 2, // optional, default 3
         barPercentage: 0.5,
-        useShadowColorFromDataset: false // optional
+        useShadowColorFromDataset: false, // optional
+        contentInset: { top: 20, bottom: 20, left: 20, right: 20 }
     };
 
     return (
         <View>
             <ProgressChart
                 data={chartData}
-                width={Dimensions.get("window").width}
+                width={Dimensions.get("window").width - 80}
                 height={220}
                 strokeWidth={16}
-                radius={32}
+                radius={16}
                 chartConfig={chartConfig}
                 hideLegend={false}
+                style={{ margin: 0 }}
             />
         </View>
     )
