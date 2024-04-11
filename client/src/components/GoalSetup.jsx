@@ -1,8 +1,9 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Image, Pressable, TextInput } from 'react-native';
 import NavBar from './NavBar';
 import { LinearGradient } from 'expo-linear-gradient';
 import AppLoading from 'expo-app-loading';
+import axios from 'axios'
 import {
   useFonts,
   MuseoModerno_600SemiBold,
@@ -12,6 +13,14 @@ import {
 import { Jost_400Regular } from '@expo-google-fonts/jost';
 
 const GoalSetup = () => {
+  const [goals, setGoals] = useState({
+    user: 1,
+    goal_date: new Date().toISOString().split('T')[0],
+    screen_goal: 3,
+    excercise_goal: 1,
+    meditation_goal: 30
+  })
+
   let [fontsLoaded] = useFonts({
     MuseoModerno_600SemiBold,
     MuseoModerno_700Bold,
@@ -24,26 +33,78 @@ const GoalSetup = () => {
 
   let icon = require("../assets/img/plus-icon.png");
 
+  const handlePress = async () => {
+    try {
+      const response = await axios.post('http://localhost:8000', goals)
+      return response.data;
+    } catch (error) {
+      console.error('Error posting data: ', error);
+      throw error;
+    }
+  }
+
   return (
     <View style={styles.container}>
       <LinearGradient colors={['#F0FDFF', '#8B9DFF']} style={styles.background} />
       <Text style={[styles.title, styles.jost]}>Let's set up your goals</Text>
       <View style={styles.boxes}>
+        {/* Screen time */}
         <View style={styles.box}>
           <Text style={[styles.time, styles.jost]}>Screen time:</Text>
-          <Text style={[styles.amount, styles.museo]}>3 <Text style={styles.unit}>hours</Text></Text>
+          <View style={styles.input}>
+            <TextInput style={[styles.amount, styles.museo]}
+              onChangeText={(text) => {
+                if (/^\d+$/.test(text)) {
+                  const number = parseInt(text);
+                  const newValue = number >= 0 ? number : 0;
+                  setGoals(prevGoals => ({ ...prevGoals, screen_goal: newValue }));
+                } else if (text === '') {
+                  setGoals(prevGoals => ({ ...prevGoals, screen_goal: 0 }));
+                }
+              }}
+              value={goals.screen_goal.toString()} />
+            <Text style={[styles.unit, styles.museo]}>hours</Text>
+          </View>
         </View>
+        {/* exc time */}
         <View style={styles.box}>
-        <Text style={[styles.time, styles.jost]}>Exercise time:</Text>
-          <Text style={[styles.amount, styles.museo]}>1 <Text style={styles.unit}>hour</Text></Text>
+          <Text style={[styles.time, styles.jost]}>Exercise time:</Text>
+          <View style={styles.input}>
+            <TextInput style={[styles.amount, styles.museo]}
+              onChangeText={(text) => {
+                if (/^\d+$/.test(text)) {
+                  const number = parseInt(text);
+                  const newValue = number >= 0 ? number : 0;
+                  setGoals(prevGoals => ({ ...prevGoals, excercise_goal: newValue }));
+                } else if (text === '') {
+                  setGoals(prevGoals => ({ ...prevGoals, excercise_goal: 0 }));
+                }
+              }}
+              value={goals.excercise_goal.toString()} />
+            <Text style={[styles.unit, styles.museo]}>hours</Text>
+          </View>
         </View>
+        {/* med time */}
         <View style={styles.box}>
           <Text style={[styles.time, styles.jost]}>Meditation time:</Text>
-          <Text style={[styles.amount, styles.museo]}>30 <Text style={styles.unit}>mins</Text></Text>
+          <View style={styles.input}>
+            <TextInput style={[styles.amount, styles.museo]}
+              onChangeText={(text) => {
+                if (/^\d+$/.test(text)) {
+                  const number = parseInt(text);
+                  const newValue = number >= 0 ? number : 0;
+                  setGoals(prevGoals => ({ ...prevGoals, meditation_goal: newValue }));
+                } else if (text === '') {
+                  setGoals(prevGoals => ({ ...prevGoals, meditation_goal: 0 }));
+                }
+              }}
+              value={goals.meditation_goal.toString()} />
+            <Text style={[styles.unit, styles.museo]}>minutes</Text>
+          </View>
         </View>
-        <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 18 }}>
-          <Image source={icon} style={styles.icon}/>
-        </View>
+        <Pressable style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 18 }} onPress={handlePress}>
+          <Image source={icon} style={styles.icon} />
+        </Pressable>
       </View>
       <View style={styles.buttonContainer}>
         <View style={styles.button}>
@@ -52,6 +113,33 @@ const GoalSetup = () => {
       </View>
       <NavBar />
     </View>
+
+    // <View style={styles.container}>
+    //   <LinearGradient colors={['#F0FDFF', '#8B9DFF']} style={styles.background} />
+    //   <Text style={[styles.title, styles.jost]}>Let's set up your goals</Text>
+    //   <View style={styles.boxes}>
+    //     <View style={styles.box}>
+    //       <Text style={[styles.time, styles.jost]}>Screen time:</Text>
+    //       <Text style={[styles.amount, styles.museo]}>3 <Text style={styles.unit}>hours</Text></Text>
+    //     </View>
+    //     <View style={styles.box}>
+    //       <Text style={[styles.time, styles.jost]}>Exercise time:</Text>
+    //       <Text style={[styles.amount, styles.museo]}>1 <Text style={styles.unit}>hour</Text></Text>
+    //     </View>
+    //     <View style={styles.box}>
+    //       <Text style={[styles.time, styles.jost]}>Meditation time:</Text>
+    //       <Text style={[styles.amount, styles.museo]}>30 <Text style={styles.unit}>mins</Text></Text>
+    //     </View>
+    //     <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 18 }}>
+    //       <Image source={icon} style={styles.icon} />
+    //     </View>
+    //   </View>
+    //   <View style={styles.buttonContainer}>
+    //     <View style={styles.button}>
+    //       <Text style={[styles.buttonText]}>Next</Text>
+    //     </View>
+    //   </View>
+    // </View>
   );
 }
 
@@ -102,10 +190,14 @@ const styles = StyleSheet.create({
     fontSize: 32,
     marginLeft: 140,
     marginTop: 8,
-    textAlign: 'right'
+    textAlign: 'right',
+    //testing
+    width: 75,
   },
   unit: {
-    fontSize: 14
+    fontSize: 14,
+    paddingTop: 29,
+    paddingLeft: 5
   },
   buttonContainer: {
     height: '12%',
@@ -124,5 +216,10 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontFamily: 'Jost_400Regular',
+  },
+  input: {
+    display: 'flex',
+    flexDirection: 'row',
+    // paddingTop: 20
   }
 });

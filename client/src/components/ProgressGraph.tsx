@@ -20,9 +20,9 @@ const ProgressGraph = () => {
     useEffect(() => {
         const getData = async () => {
             try {
-                const user_id = 1
-                const date = "2024-04-10"
-                const res = await axios.get(`http://localhost:8000/?user_id=${user_id}&date=${date}`);
+                const user_id = 1;
+                const currentDate = new Date().toISOString().split('T')[0];
+                const res = await axios.get(`http://localhost:8000/?user_id=${user_id}&date=${currentDate}`);
                 setData(res.data)
             } catch (error) {
                 console.log("Error fetching user data", error)
