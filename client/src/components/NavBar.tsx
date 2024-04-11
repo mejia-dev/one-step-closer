@@ -8,12 +8,13 @@ const NavBar = () => {
   let dashboard = require("../assets/img/dashboard-icon.png");
   let history = require("../assets/img/history-icon.png");
   let settings = require("../assets/img/settings-icon.png");
+  const navigation = useNavigation();
 
   const navigateToDashboard = () => {
-    useNavigation.navigate('Dashboard');
+    navigation.navigate('Dashboard');
   };
   const navigateToProgressGraph = () => {
-    useNavigation.navigate('ProgressGraph');
+    navigation.navigate('ProgressGraph');
   };
 
 

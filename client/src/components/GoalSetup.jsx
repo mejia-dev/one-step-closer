@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, Pressable, TextInput } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; 
+import { StyleSheet, Text, View, Image, Pressable, TextInput, TouchableOpacity } from 'react-native';
 import NavBar from './NavBar';
 import { LinearGradient } from 'expo-linear-gradient';
 import AppLoading from 'expo-app-loading';
@@ -13,6 +14,9 @@ import {
 import { Jost_400Regular } from '@expo-google-fonts/jost';
 
 const GoalSetup = () => {
+  
+  const navigation = useNavigation();
+  
   const [goals, setGoals] = useState({
     user: 1,
     goal_date: new Date().toISOString().split('T')[0],
@@ -33,6 +37,10 @@ const GoalSetup = () => {
 
   let icon = require("../assets/img/plus-icon.png");
 
+  
+    const navigateToNotificationSetup = () => {
+    navigation.navigate('NotificationSetup');
+  };
   const handlePress = async () => {
     try {
       const response = await axios.post('http://localhost:8000', goals)
@@ -107,11 +115,10 @@ const GoalSetup = () => {
         </Pressable>
       </View>
       <View style={styles.buttonContainer}>
-        <View style={styles.button}>
-          <Text style={[styles.buttonText]}>Next</Text>
-        </View>
+        <TouchableOpacity style={styles.button} onPress={navigateToNotificationSetup}>
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
       </View>
-      <NavBar />
     </View>
 
     // <View style={styles.container}>
