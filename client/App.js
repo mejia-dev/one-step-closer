@@ -8,6 +8,7 @@ import GoalSetup from './src/components/GoalSetup';
 import NotificationSetup from './src/components/NotificationSetup';
 import Dashboard from './src/components/Dashboard';
 
+
 const Stack = createStackNavigator();
 
 export default function App() {
