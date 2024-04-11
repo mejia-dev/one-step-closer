@@ -6,6 +6,9 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
+from .serializers import GoalSerializer
+from userinfo.models import Goal
+
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -30,3 +33,9 @@ def getRoutes(request):
     ]
 
     return Response(routes)
+
+@api_view(['GET'])
+def getGoals(request):
+    goals = Goal.objects.all()
+    serializer = GoalSerializer(goals, many=True)
+    return Response(serializer.data)
