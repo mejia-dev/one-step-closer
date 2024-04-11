@@ -9,7 +9,7 @@ import Page3 from './src/components/page3';
 import Landing from './src/components/Landing';
 import GoalSetup from './src/components/GoalSetup';
 import NotificationSetup from './src/components/NotificationSetup';
-import ProgressGraph from './src/components/ProgressGraph';
+
 
 const Stack = createStackNavigator();
 
@@ -24,7 +24,7 @@ export default function App() {
         <Stack.Screen name="Notification Setup" component={NotificationSetup}
           options={{ headerShown: false }} />
       </Stack.Navigator>
-      <ProgressGraph />
+
 
     </NavigationContainer>
   );

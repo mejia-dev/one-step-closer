@@ -38,9 +38,9 @@ const ProgressGraph = () => {
     //     color: (opacity = 1) => `rgba(0, 54, 92, ${opacity})`,
     // };
 
-    const screenPercent = data.screen_goal / data.screen_time;
-    const meditationPercent = data.meditation_goal / data.meditation_time;
-    const excercisePercent = data.excercise_goal / data.excercise_time;
+    const screenPercent = data.screen_time / data.screen_goal;
+    const meditationPercent = data.meditation_time / data.meditation_goal;
+    const excercisePercent = data.excercise_time / data.excercise_goal;
 
     const chartData = {
         labels: ["Screen time", "Meditation", "Excercise"],
