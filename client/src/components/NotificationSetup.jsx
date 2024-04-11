@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import NavBar from './NavBar';
 import { LinearGradient } from 'expo-linear-gradient';
 import AppLoading from 'expo-app-loading';
 import {
@@ -53,6 +54,7 @@ const NotificationSetup = () => {
           <Text style={[styles.buttonText]}>Next</Text>
         </View>
       </View>
+      <NavBar />
     </View>
   );
 }

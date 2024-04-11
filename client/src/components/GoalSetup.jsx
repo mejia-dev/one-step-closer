@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, Pressable, TextInput } from 'react-native';
+import NavBar from './NavBar';
 import { LinearGradient } from 'expo-linear-gradient';
 import AppLoading from 'expo-app-loading';
 import axios from 'axios'
@@ -110,7 +111,8 @@ const GoalSetup = () => {
           <Text style={[styles.buttonText]}>Next</Text>
         </View>
       </View>
-    </View >
+      <NavBar />
+    </View>
 
     // <View style={styles.container}>
     //   <LinearGradient colors={['#F0FDFF', '#8B9DFF']} style={styles.background} />
