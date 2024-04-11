@@ -6,24 +6,20 @@ import Landing from './Landing.jsx';
 import GoalSetup from './GoalSetup';
 import NotificationSetup from './NotificationSetup';
 import Dashboard from './Dashboard';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AuthContext from '../context/AuthContext.jsx';
 
 import LoginForm from './LoginForm.tsx';
+
 
 const Stack = createStackNavigator();
 
 export default function AuthNavigator() {
-
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    setIsAuthenticated(false);
-  });
+  const {user} = useContext(AuthContext);
 
   return (
     <NavigationContainer style={{ flex: 1, flexDirection: 'column' }}>
       <Stack.Navigator>
-        {isAuthenticated ? (
+        {user ? (
           <>
             <Stack.Screen name="Dashboard" component={Dashboard}
               options={{ headerShown: false }} />
