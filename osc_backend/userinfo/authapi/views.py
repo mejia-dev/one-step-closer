@@ -37,6 +37,7 @@ def getRoutes(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getGoals(request):
-    goals = Goal.objects.all()
+    user = request.user
+    goals = user.goal_set.all()
     serializer = GoalSerializer(goals, many=True)
     return Response(serializer.data)
