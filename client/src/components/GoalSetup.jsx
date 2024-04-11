@@ -16,8 +16,11 @@ const GoalSetup = () => {
     user: 1,
     goal_date: new Date().toISOString().split('T')[0],
     screen_goal: 3,
+    meditation_goal: 30,
     excercise_goal: 1,
-    meditation_goal: 30
+    screen_time: 3,
+    meditation_time: 30,
+    excercise_time: 1
   })
 
   let [fontsLoaded] = useFonts({
