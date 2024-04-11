@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
@@ -9,14 +9,28 @@ const NavBar = () => {
   let history = require("../assets/img/history-icon.png");
   let settings = require("../assets/img/settings-icon.png");
 
+  const navigateToDashboard = () => {
+    useNavigation.navigate('Dashboard');
+  };
+  const navigateToProgressGraph = () => {
+    useNavigation.navigate('ProgressGraph');
+  };
+
+
   return (
     <View style={styles.container}>
-      <Image source={dashboard} />
+      <TouchableOpacity onPress={navigateToDashboard} style={styles.navItem}>
+        <Image source={dashboard} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={navigateToProgressGraph} style={styles.navItem}>
+        <Image source={settings} />
+      </TouchableOpacity>
       <Image source={history} />
       <Image source={settings} />
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
