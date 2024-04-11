@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, Pressable, TextInput } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import AppLoading from 'expo-app-loading';
+import axios from 'axios'
 import {
   useFonts,
   MuseoModerno_600SemiBold,
@@ -12,9 +13,11 @@ import { Jost_400Regular } from '@expo-google-fonts/jost';
 
 const GoalSetup = () => {
   const [goals, setGoals] = useState({
-    screenTime: 3,
-    excerciseTime: 1,
-    meditationTime: 30
+    user: 1,
+    goal_date: new Date().toISOString().split('T')[0],
+    screen_goal: 3,
+    excercise_goal: 1,
+    meditation_goal: 30
   })
 
   let [fontsLoaded] = useFonts({
@@ -29,8 +32,14 @@ const GoalSetup = () => {
 
   let icon = require("../assets/img/plus-icon.png");
 
-  const handlePress = () => {
-
+  const handlePress = async () => {
+    try {
+      const response = await axios.post('http://localhost:8000', goals)
+      return response.data;
+    } catch (error) {
+      console.error('Error posting data: ', error);
+      throw error;
+    }
   }
 
   return (
@@ -47,12 +56,12 @@ const GoalSetup = () => {
                 if (/^\d+$/.test(text)) {
                   const number = parseInt(text);
                   const newValue = number >= 0 ? number : 0;
-                  setGoals(prevGoals => ({ ...prevGoals, screenTime: newValue }));
+                  setGoals(prevGoals => ({ ...prevGoals, screen_goal: newValue }));
                 } else if (text === '') {
-                  setGoals(prevGoals => ({ ...prevGoals, screenTime: 0 }));
+                  setGoals(prevGoals => ({ ...prevGoals, screen_goal: 0 }));
                 }
               }}
-              value={goals.screenTime.toString()} />
+              value={goals.screen_goal.toString()} />
             <Text style={[styles.unit, styles.museo]}>hours</Text>
           </View>
         </View>
@@ -65,12 +74,12 @@ const GoalSetup = () => {
                 if (/^\d+$/.test(text)) {
                   const number = parseInt(text);
                   const newValue = number >= 0 ? number : 0;
-                  setGoals(prevGoals => ({ ...prevGoals, excerciseTime: newValue }));
+                  setGoals(prevGoals => ({ ...prevGoals, excercise_goal: newValue }));
                 } else if (text === '') {
-                  setGoals(prevGoals => ({ ...prevGoals, excerciseTime: 0 }));
+                  setGoals(prevGoals => ({ ...prevGoals, excercise_goal: 0 }));
                 }
               }}
-              value={goals.excerciseTime.toString()} />
+              value={goals.excercise_goal.toString()} />
             <Text style={[styles.unit, styles.museo]}>hours</Text>
           </View>
         </View>
@@ -83,12 +92,12 @@ const GoalSetup = () => {
                 if (/^\d+$/.test(text)) {
                   const number = parseInt(text);
                   const newValue = number >= 0 ? number : 0;
-                  setGoals(prevGoals => ({ ...prevGoals, meditationTime: newValue }));
+                  setGoals(prevGoals => ({ ...prevGoals, meditation_goal: newValue }));
                 } else if (text === '') {
-                  setGoals(prevGoals => ({ ...prevGoals, meditationTime: 0 }));
+                  setGoals(prevGoals => ({ ...prevGoals, meditation_goal: 0 }));
                 }
               }}
-              value={goals.meditationTime.toString()} />
+              value={goals.meditation_goal.toString()} />
             <Text style={[styles.unit, styles.museo]}>minutes</Text>
           </View>
         </View>
