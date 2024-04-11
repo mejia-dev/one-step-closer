@@ -21,5 +21,6 @@ from userinfo.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('', ReactView.as_view(), name="xxx")
+    path('', ReactView.as_view(), name="xxx"),
+    path('authapi/',include('userinfo.authapi.urls'))
 ]
