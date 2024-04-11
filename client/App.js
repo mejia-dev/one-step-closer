@@ -24,8 +24,8 @@ export default function App() {
       <Stack.Navigator>
         {isAuthenticated ? (
           <>
-            <Stack.Screen name="Dashboard" component={Dashboard}
-              options={{ headerShown: false }} />
+            {/* <Stack.Screen name="Dashboard" component={Dashboard}
+              options={{ headerShown: false }} /> */}
             <Stack.Screen name="Goal Setup" component={GoalSetup}
               options={{ headerShown: false }} />
             <Stack.Screen name="Notification Setup" component={NotificationSetup}
