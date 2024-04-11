@@ -9,25 +9,27 @@ export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
 
-  // this code checks if there are authTokens in local storage. If there are authTokens, it keeps the existing ones. If not, it sets the value to null.
-  const [authTokens, setAuthTokens] = useState(async () => AsyncStorage.getItem('authTokens') ? await AsyncStorage.getItem('authTokens') : null);
+  const [authTokens, setAuthTokens] = useState(null);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // this code parses the existence of user data on first render. Can't be done inline otherwise the state slice becomes a promise, not a string or null.
+  // this code parses the existence of auth tokens on first render. Can't be done inline otherwise the state slice becomes a promise, not a string or null.
   const firstRenderCheckUser = async () => {
     const userDataExistence = await AsyncStorage.getItem('authTokens').then((response) => {
       if (response) {
+        setAuthTokens(response);
         setUser(jwtDecode(response));
       } else {
+        setAuthTokens(null);
         setUser(null);
       }
     });
   }
   firstRenderCheckUser();
 
-  
+
   // login user. Fetch from the auth api. 
-    // If the response is good, set the local state slices, then add the tokens to Async storage
+  // If the response is good, set the local state slices, then add the tokens to Async storage
   const loginUser = async (event) => {
     event.preventDefault();
     const response = await fetch('http://127.0.0.1:8000/authapi/token/', {
@@ -51,6 +53,7 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+
   // logout user. Clear local state slices, then remove tokens from async storage
   const logoutUser = () => {
     setAuthTokens(null);
@@ -58,73 +61,61 @@ export const AuthProvider = ({ children }) => {
     AsyncStorage.removeItem('authTokens');
   }
 
-  // development only. Check for the exist
-  const TESTgetUserData = async () => {
-    event.preventDefault();
-    try {
-      const jsonValue = await AsyncStorage.getItem('authTokens');
-      console.log(jsonValue != null ? JSON.parse(jsonValue) : null)
-    } catch (e) {
-      // read error
+
+  // attempt to update the refresh token. If not successful, sign out the current user.
+  const updateToken = async () => {
+    const response = await fetch('http://127.0.0.1:8000/authapi/token/refresh/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ 'refresh': JSON.parse(authTokens)?.refresh })
+    });
+    const data = await response.json();
+    if (response.status === 200) {
+      setAuthTokens(data);
+      setUser(jwtDecode(data.access));
+      try {
+        AsyncStorage.setItem('authTokens', JSON.stringify(data));
+      } catch (error) {
+        console.log("Error saving tokens to async storage: " + error.message);
+      }
+    } else {
+      logoutUser();
+    }
+
+    if (loading) {
+      setLoading(false);
     }
   }
 
-  // let updateToken = async ()=> {
+  useEffect(() => {
+    // if the site is loading, update the token.
+    if (loading) {
+      updateToken()
+    }
 
-  //     let response = await fetch('http://127.0.0.1:8000/api/token/refresh/', {
-  //         method:'POST',
-  //         headers:{
-  //             'Content-Type':'application/json'
-  //         },
-  //         body:JSON.stringify({'refresh':authTokens?.refresh})
-  //     })
+    // use this to convert milliseconds to seconds for the sake of the refresh interval.
+    // refresh interval should refresh one minute sooner than access token lifetime (a token with 5 minute lifetime should refresh every 4 minutes)
+    const minutesInMilliseconds = (minutes) => {
+      return minutes * 60 * 1000
+    }
 
-  //     let data = await response.json()
+    const refreshInterval = setInterval(() => {
+      if (authTokens) {
+        updateToken();
+      }
+    }, minutesInMilliseconds(4))
+    return () => clearInterval(refreshInterval)
 
-  //     if (response.status === 200){
-  //         setAuthTokens(data)
-  //         setUser(jwtDecode(data.access))
-  //         AsyncStorage.setItem('authTokens', JSON.stringify(data))
-  //     }else{
-  //         logoutUser()
-  //     }
-
-  //     if(loading){
-  //         setLoading(false)
-  //     }
-  // }
+  }, [authTokens, loading])
 
   let contextData = {
     user: user,
-    // authTokens:authTokens,
+    authTokens: authTokens,
     loginUser: loginUser,
-    TESTgetUserData: TESTgetUserData,
-    logoutUser:logoutUser,
+    logoutUser: logoutUser,
   }
-
-
-  // useEffect(()=> {
-
-  //     if(loading){
-  //         updateToken()
-  //     }
-
-  //     let fourMinutes = 1000 * 60 * 4
-
-  //     let interval =  setInterval(()=> {
-  //         if(authTokens){
-  //             updateToken()
-  //         }
-  //     }, fourMinutes)
-  //     return ()=> clearInterval(interval)
-
-  // }, [authTokens, loading])
-
-  // return(
-  //     <AuthContext.Provider value={contextData} >
-  //         {loading ? null : children}
-  //     </AuthContext.Provider>
-  // )
 
   return (
     <AuthContext.Provider value={contextData} >
