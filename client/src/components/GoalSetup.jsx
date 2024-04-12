@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, Image, Pressable, TextInput, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; 
-import NavBar from './NavBar';
+import { useNavigation } from '@react-navigation/native';
 import AuthContext from '../context/AuthContext';
+import Loading from './Loading'
 import { LinearGradient } from 'expo-linear-gradient';
 import AppLoading from 'expo-app-loading';
 import axios from 'axios'
@@ -20,8 +20,12 @@ const GoalSetup = () => {
 
   const navigation = useNavigation();
 
+  if (!user || !user.user_id) {
+    return <Loading />;
+  }
+
   const [goals, setGoals] = useState({
-    user: 1,
+    user: user.user_id,
     screen_goal: 3,
     meditation_goal: 30,
     excercise_goal: 1,
@@ -42,11 +46,12 @@ const GoalSetup = () => {
 
   let icon = require("../assets/img/plus-icon.png");
 
-  
-    const navigateToNotificationSetup = () => {
+
+  const navigateToNotificationSetup = () => {
     navigation.navigate('NotificationSetup');
   };
   const handlePress = async () => {
+    console.log(user.user_id)
     try {
       const response = await axios.post('http://127.0.0.1:8000/', goals)
       return response.data;

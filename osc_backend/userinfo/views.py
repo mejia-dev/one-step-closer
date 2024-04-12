@@ -46,20 +46,3 @@ class ReactView(APIView):
         else:
             print("Serializer Errors:", serializer.errors)  # Print serializer errors for debugging
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    # def post(self, request):
-    #     # Ensure user ID is present in the request data
-    #     user_id = request.data.get('user')
-    #     if user_id is None:
-    #         return Response({'error': 'User ID is missing'}, status=status.HTTP_400_BAD_REQUEST)
-
-    #     # Add user ID to the request data if not already present
-    #     request_data = request.data.copy()
-    #     request_data.setdefault('user', user_id)
-
-    #     # Pass the updated request data to the serializer
-    #     serializer = ReactSerializer(data=request_data)
-
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

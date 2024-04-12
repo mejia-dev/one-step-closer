@@ -4,10 +4,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Landing from './Landing.jsx';
 import GoalSetup from './GoalSetup';
+import GoalUpdate from './GoalUpdate.jsx'
 import ProgressGraph from './ProgressGraph';
 import NotificationSetup from './NotificationSetup';
 import Dashboard from './Dashboard';
-import AuthContext from '../context/AuthContext'; 
+import AuthContext from '../context/AuthContext';
 
 import NavBar from './NavBar';
 import LoginForm from './LoginForm.tsx';
@@ -21,11 +22,13 @@ export default function AuthNavigator() {
   return (
     <NavigationContainer style={{ flex: 1, flexDirection: 'column' }}>
       <Stack.Navigator>
-       {user ? ( 
+        {user ? (
           <>
             {/* <Stack.Screen name="Dashboard" component={Dashboard}
               options={{ headerShown: false }} /> */}
             <Stack.Screen name="Goal Setup" component={GoalSetup}
+              options={{ headerShown: false }} />
+            <Stack.Screen name="Goal Update" component={GoalUpdate}
               options={{ headerShown: false }} />
             <Stack.Screen name="Notification Setup" component={NotificationSetup}
               options={{ headerShown: false }} />
