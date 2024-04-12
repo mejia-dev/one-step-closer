@@ -21,7 +21,7 @@ const GoalSetup = () => {
   const navigation = useNavigation();
 
   if (!user || !user.user_id) {
-    return <Loading />;
+    return <AppLoading />;
   }
 
   const [goals, setGoals] = useState({
@@ -40,6 +40,7 @@ const GoalSetup = () => {
     MuseoModerno_800ExtraBold,
     Jost_400Regular
   });
+
   if (!fontsLoaded) {
     return <AppLoading />;
   }
@@ -50,6 +51,7 @@ const GoalSetup = () => {
   const navigateToNotificationSetup = () => {
     navigation.navigate('NotificationSetup');
   };
+
   const handlePress = async () => {
     console.log(user.user_id)
     try {

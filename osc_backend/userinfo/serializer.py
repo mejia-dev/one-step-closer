@@ -7,8 +7,8 @@ class ReactSerializer(serializers.ModelSerializer):
         fields = '__all__'
         partial = True
 
-    def save(self, **kwargs):
-        print("Saving data:", self.validated_data)  # Print validated data for debugging
-        instance = super().save(**kwargs)
-        print("Instance saved:", instance)  # Print saved instance for debugging
-        return instance
+    # def save(self, **kwargs):
+    #     print("Saving data:", self.validated_data)  # Print validated data for debugging
+    #     instance = super().save(**kwargs)
+    #     print("Instance saved:", instance)  # Print saved instance for debugging
+    #     return instance

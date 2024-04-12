@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, Pressable, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AuthContext from '../context/AuthContext';
@@ -14,20 +14,35 @@ import {
 import { Jost_400Regular } from '@expo-google-fonts/jost';
 
 const GoalUpdate = () => {
-
     let { user } = useContext(AuthContext);
-
     const navigation = useNavigation();
-
-    const [goals, setGoals] = useState({
-        user: user.user_id,
-        screen_goal: 3,
-        meditation_goal: 30,
-        excercise_goal: 1,
-        screen_time: 3,
-        meditation_time: 30,
-        excercise_time: 1
+    const [progress, setProgress] = useState({
+        user: 0,
+        goal_date: new Date().toISOString().split('T')[0],
+        screen_goal: 0,
+        meditation_goal: 0,
+        excercise_goal: 0,
+        screen_time: 0,
+        meditation_time: 0,
+        excercise_time: 0
     })
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const userId = user.user_id
+                console.log(user)
+                const currentDate = new Date().toISOString().split('T')[0];
+                const res = await axios.get(`http://localhost:8000/?user_id=${userId}&date=${currentDate}`);
+                console.log(res.data)
+                setProgress(res.data)
+            } catch (error) {
+                console.log("Error fetching user data", error)
+            }
+        };
+
+        getData();
+    }, [])
 
     let [fontsLoaded] = useFonts({
         MuseoModerno_600SemiBold,
@@ -39,15 +54,14 @@ const GoalUpdate = () => {
         return <AppLoading />;
     }
 
-    let icon = require("../assets/img/plus-icon.png");
+    // let icon = require("../assets/img/plus-icon.png");
 
-
-    const navigateToNotificationSetup = () => {
-        navigation.navigate('NotificationSetup');
+    const navigateToDashboard = () => {
+        navigation.navigate('Dashboard');
     };
     const handlePress = async () => {
         try {
-            const response = await axios.post('http://127.0.0.1:8000/', goals)
+            const response = await axios.patch('http://localhost:8000/', progress)
             return response.data;
         } catch (error) {
             console.error('Error posting data: ', error);
@@ -59,6 +73,9 @@ const GoalUpdate = () => {
         <View style={styles.container}>
             <LinearGradient colors={['#F0FDFF', '#8B9DFF']} style={styles.background} />
             <Text style={[styles.title, styles.jost]}>Let's update your goals</Text>
+            <Text style={[styles.title, styles.jost]}>Screen time goal: {progress.screen_goal}</Text>
+            <Text style={[styles.title, styles.jost]}>Excercise goal: {progress.excercise_goal}</Text>
+            <Text style={[styles.title, styles.jost]}>Meditation goal: {progress.meditation_goal}</Text>
             <View style={styles.boxes}>
                 {/* Screen time */}
                 <View style={styles.box}>
@@ -69,12 +86,12 @@ const GoalUpdate = () => {
                                 if (/^\d+$/.test(text)) {
                                     const number = parseInt(text);
                                     const newValue = number >= 0 ? number : 0;
-                                    setGoals(prevGoals => ({ ...prevGoals, screen_goal: newValue }));
+                                    setProgress(prevProgress => ({ ...prevProgress, screen_time: newValue }));
                                 } else if (text === '') {
-                                    setGoals(prevGoals => ({ ...prevGoals, screen_goal: 0 }));
+                                    setProgress(prevProgress => ({ ...prevProgress, screen_time: 0 }));
                                 }
                             }}
-                            value={goals.screen_goal.toString()} />
+                            value={progress.screen_time} />
                         <Text style={[styles.unit, styles.museo]}>hours</Text>
                     </View>
                 </View>
@@ -87,12 +104,12 @@ const GoalUpdate = () => {
                                 if (/^\d+$/.test(text)) {
                                     const number = parseInt(text);
                                     const newValue = number >= 0 ? number : 0;
-                                    setGoals(prevGoals => ({ ...prevGoals, excercise_goal: newValue }));
+                                    setProgress(prevProgress => ({ ...prevProgress, excercise_time: newValue }));
                                 } else if (text === '') {
-                                    setGoals(prevGoals => ({ ...prevGoals, excercise_goal: 0 }));
+                                    setProgress(prevProgress => ({ ...prevProgress, excercise_time: 0 }));
                                 }
                             }}
-                            value={goals.excercise_goal.toString()} />
+                            value={progress.excercise_time} />
                         <Text style={[styles.unit, styles.museo]}>hours</Text>
                     </View>
                 </View>
@@ -105,23 +122,20 @@ const GoalUpdate = () => {
                                 if (/^\d+$/.test(text)) {
                                     const number = parseInt(text);
                                     const newValue = number >= 0 ? number : 0;
-                                    setGoals(prevGoals => ({ ...prevGoals, meditation_goal: newValue }));
+                                    setProgress(prevProgress => ({ ...prevProgress, meditation_time: newValue }));
                                 } else if (text === '') {
-                                    setGoals(prevGoals => ({ ...prevGoals, meditation_goal: 0 }));
+                                    setProgress(prevProgress => ({ ...prevProgress, meditation_time: 0 }));
                                 }
                             }}
-                            value={goals.meditation_goal.toString()} />
+                            value={progress.meditation_time} />
                         <Text style={[styles.unit, styles.museo]}>minutes</Text>
                     </View>
                 </View>
-                <Pressable style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 18 }} onPress={handlePress}>
-                    <Image source={icon} style={styles.icon} />
-                </Pressable>
             </View>
             <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.button} onPress={navigateToNotificationSetup}>
-                    <Text style={styles.buttonText}>Next</Text>
-                </TouchableOpacity>
+                <Pressable style={styles.button} onPress={handlePress}>
+                    <Text style={styles.buttonText}>Update</Text>
+                </Pressable>
             </View>
         </View>
     );
@@ -152,7 +166,7 @@ const styles = StyleSheet.create({
         color: '#00365C'
     },
     title: {
-        marginTop: '25%',
+        marginTop: '5%',
         fontSize: 24
     },
     boxes: {
