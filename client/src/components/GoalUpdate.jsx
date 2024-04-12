@@ -18,6 +18,7 @@ const GoalUpdate = () => {
     const navigation = useNavigation();
     const [progress, setProgress] = useState({
         user: 0,
+        goal_date: new Date().toISOString().split('T')[0],
         screen_goal: 0,
         meditation_goal: 0,
         excercise_goal: 0,
@@ -60,7 +61,7 @@ const GoalUpdate = () => {
     };
     const handlePress = async () => {
         try {
-            const response = await axios.post('http://127.0.0.1:8000/', progress)
+            const response = await axios.patch('http://localhost:8000/', progress)
             return response.data;
         } catch (error) {
             console.error('Error posting data: ', error);
