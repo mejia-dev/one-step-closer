@@ -26,8 +26,8 @@ export default function AuthNavigator() {
           <>
             {/* <Stack.Screen name="Dashboard" component={Dashboard}
               options={{ headerShown: false }} /> */}
-            <Stack.Screen name="Goal Setup" component={GoalSetup}
-              options={{ headerShown: false }} />
+            {/* <Stack.Screen name="Goal Setup" component={GoalSetup}
+              options={{ headerShown: false }} /> */}
             <Stack.Screen name="Goal Update" component={GoalUpdate}
               options={{ headerShown: false }} />
             <Stack.Screen name="Notification Setup" component={NotificationSetup}
