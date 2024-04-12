@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, Image, Pressable, TextInput } from 'react-native';
 import NavBar from './NavBar';
+import AuthContext from '../context/AuthContext';
 import { LinearGradient } from 'expo-linear-gradient';
 import AppLoading from 'expo-app-loading';
 import axios from 'axios'
@@ -13,9 +14,10 @@ import {
 import { Jost_400Regular } from '@expo-google-fonts/jost';
 
 const GoalSetup = () => {
+  let { user } = useContext(AuthContext);
+
   const [goals, setGoals] = useState({
     user: 1,
-    goal_date: new Date().toISOString().split('T')[0],
     screen_goal: 3,
     meditation_goal: 30,
     excercise_goal: 1,
@@ -38,7 +40,7 @@ const GoalSetup = () => {
 
   const handlePress = async () => {
     try {
-      const response = await axios.post('http://localhost:8000', goals)
+      const response = await axios.post('http://127.0.0.1:8000/', goals)
       return response.data;
     } catch (error) {
       console.error('Error posting data: ', error);

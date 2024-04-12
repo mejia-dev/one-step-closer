@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
 
 class Goal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -12,5 +13,5 @@ class Goal(models.Model):
     excercise_time = models.FloatField(default=0)
 
     def __str__(self):
-        return self.goal_date
+        return self.goal_date.strftime("%Y-%m-%d")
 

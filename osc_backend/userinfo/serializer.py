@@ -1,9 +1,14 @@
 from rest_framework import serializers
-from .models import *
+from . models import *
 
 class ReactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Goal
-        fields = ['user', 'goal_date', 'screen_goal', 'meditation_goal', 'excercise_goal', 'screen_time', 'meditation_time', 'excercise_time']
-        extra_kwargs = {'user': {'read_only': True}}
+        fields = '__all__'
         partial = True
+
+    def save(self, **kwargs):
+        print("Saving data:", self.validated_data)  # Print validated data for debugging
+        instance = super().save(**kwargs)
+        print("Instance saved:", instance)  # Print saved instance for debugging
+        return instance
