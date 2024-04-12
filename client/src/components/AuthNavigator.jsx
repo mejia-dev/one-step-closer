@@ -16,24 +16,26 @@ import LoginForm from './LoginForm.tsx';
 const Stack = createStackNavigator();
 
 export default function AuthNavigator() {
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <NavigationContainer style={{ flex: 1, flexDirection: 'column' }}>
       <Stack.Navigator>
        {user ? ( 
           <>
-           <Stack.Screen name="GoalSetup" component={GoalSetup} options={{ headerShown: false }} />
-          <Stack.Screen name="NotificationSetup" component={NotificationSetup} options={{ headerShown: false }} />
-          <Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }} />
-          <Stack.Screen name="ProgressGraph" component={ProgressGraph} options={{ headerShown: false }} />
-            </>
-         ) : (
-           // <Stack.Screen name="Landing Page" component={Landing}
-           //   options={{ headerShown: false }} />
-             <Stack.Screen name="Login Page" component={LoginForm}
-             options={{ headerShown: false }} />
-         )}
+            {/* <Stack.Screen name="Dashboard" component={Dashboard}
+              options={{ headerShown: false }} /> */}
+            <Stack.Screen name="Goal Setup" component={GoalSetup}
+              options={{ headerShown: false }} />
+            <Stack.Screen name="Notification Setup" component={NotificationSetup}
+              options={{ headerShown: false }} />
+          </>
+        ) : (
+          // <Stack.Screen name="Landing Page" component={Landing}
+          //   options={{ headerShown: false }} />
+          <Stack.Screen name="Login Page" component={LoginForm}
+            options={{ headerShown: false }} />
+        )}
       </Stack.Navigator>
       <NavBar />
     </NavigationContainer>
