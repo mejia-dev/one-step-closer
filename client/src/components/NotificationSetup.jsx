@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import NavBar from './NavBar';
+import { useNavigation } from '@react-navigation/native'; 
 import { LinearGradient } from 'expo-linear-gradient';
 import AppLoading from 'expo-app-loading';
 import {
@@ -12,6 +13,7 @@ import {
 import { Jost_400Regular } from '@expo-google-fonts/jost';
 
 const NotificationSetup = () => {
+  const navigation = useNavigation();
   let [fontsLoaded] = useFonts({
     MuseoModerno_600SemiBold,
     MuseoModerno_700Bold,
@@ -23,6 +25,14 @@ const NotificationSetup = () => {
   }
 
   let icon = require("../assets/img/plus-icon.png");
+
+  const navigateToGoalSetup = () => {
+    navigation.navigate('GoalSetup');
+  };
+
+  const navigateToDashboard = () => {
+    navigation.navigate('Dashboard');
+  };
 
   return (
     <View style={styles.container}>
@@ -47,14 +57,13 @@ const NotificationSetup = () => {
         </View>
       </View>
       <View style={styles.buttonContainer}>
-        <View style={styles.button}>
-          <Text style={[styles.buttonText]}>Back</Text>
-        </View>
-        <View style={styles.button}>
-          <Text style={[styles.buttonText]}>Next</Text>
-        </View>
+        <TouchableOpacity style={styles.button} onPress={navigateToGoalSetup}>
+          <Text style={styles.buttonText}>Back</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={navigateToDashboard}>
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
       </View>
-      <NavBar />
     </View>
   );
 }
