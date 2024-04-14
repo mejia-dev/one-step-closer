@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
@@ -13,19 +13,19 @@ const NavBar = () => {
   const navigateToDashboard = () => {
     navigation.navigate('Dashboard');
   };
-  const navigateToProgressGraph = () => {
-    navigation.navigate('ProgressGraph');
+  const navigateToGoalUpdate = () => {
+    navigation.navigate('GoalUpdate');
   };
 
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={navigateToDashboard} style={styles.navItem}>
+      <Pressable onPress={navigateToDashboard} style={styles.navItem}>
         <Image source={dashboard} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={navigateToProgressGraph} style={styles.navItem}>
+      </Pressable>
+      <Pressable onPress={navigateToGoalUpdate} style={styles.navItem}>
         <Image source={settings} />
-      </TouchableOpacity>
+      </Pressable>
       <Image source={history} />
       <Image source={settings} />
     </View>
