@@ -21,11 +21,6 @@ const ProgressGraph = () => {
 
     let { user } = useContext(AuthContext);
 
-
-    // if (!user || !user.user_id) {
-    //     return <AppLoading />;
-    // }
-
     useEffect(() => {
         const getData = async () => {
             try {
@@ -55,9 +50,9 @@ const ProgressGraph = () => {
         backgroundGradientFrom: "white",
         backgroundGradientTo: "white",
         color: (opacity = 2) => `rgba(0, 88, 151, ${opacity})`,
-        strokeWidth: 2, // optional, default 3
+        strokeWidth: 2,
         barPercentage: 0.5,
-        useShadowColorFromDataset: false, // optional
+        useShadowColorFromDataset: false,
         contentInset: { top: 20, bottom: 20, left: 20, right: 20 }
     };
 

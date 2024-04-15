@@ -131,33 +131,6 @@ const GoalSetup = () => {
         </TouchableOpacity>
       </View>
     </View>
-
-    // <View style={styles.container}>
-    //   <LinearGradient colors={['#F0FDFF', '#8B9DFF']} style={styles.background} />
-    //   <Text style={[styles.title, styles.jost]}>Let's set up your goals</Text>
-    //   <View style={styles.boxes}>
-    //     <View style={styles.box}>
-    //       <Text style={[styles.time, styles.jost]}>Screen time:</Text>
-    //       <Text style={[styles.amount, styles.museo]}>3 <Text style={styles.unit}>hours</Text></Text>
-    //     </View>
-    //     <View style={styles.box}>
-    //       <Text style={[styles.time, styles.jost]}>Exercise time:</Text>
-    //       <Text style={[styles.amount, styles.museo]}>1 <Text style={styles.unit}>hour</Text></Text>
-    //     </View>
-    //     <View style={styles.box}>
-    //       <Text style={[styles.time, styles.jost]}>Meditation time:</Text>
-    //       <Text style={[styles.amount, styles.museo]}>30 <Text style={styles.unit}>mins</Text></Text>
-    //     </View>
-    //     <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 18 }}>
-    //       <Image source={icon} style={styles.icon} />
-    //     </View>
-    //   </View>
-    //   <View style={styles.buttonContainer}>
-    //     <View style={styles.button}>
-    //       <Text style={[styles.buttonText]}>Next</Text>
-    //     </View>
-    //   </View>
-    // </View>
   );
 }
 

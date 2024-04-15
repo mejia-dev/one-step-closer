@@ -14,30 +14,6 @@ import {
 import { Jost_400Regular } from '@expo-google-fonts/jost';
 
 const Dashboard = () => {
-  let { user } = useContext(AuthContext);
-
-  const [data, setData] = useState();
-
-  // if (!user || !user.user_id) {
-  //   return <AppLoading />;
-  // }
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const userId = user.user_id
-        const currentDate = new Date().toISOString().split('T')[0];
-        const res = await axios.get(`http://localhost:8000/?user_id=${userId}&date=${currentDate}`);
-        console.log(res.data)
-        setData(res.data)
-      } catch (error) {
-        console.log("Error fetching user data", error)
-      }
-    };
-
-    getData();
-  }, [])
-
 
   let [fontsLoaded] = useFonts({
     MuseoModerno_600SemiBold,
@@ -53,7 +29,7 @@ const Dashboard = () => {
   return (
     <View style={styles.container}>
       <LinearGradient colors={['#F0FDFF', '#8B9DFF']} style={styles.background} />
-      <Text style={[styles.title, styles.jost]}>{new Date().toISOString().split('T')[0]}</Text>
+      <Text style={[styles.title, styles.jost]}>April 15th, 2024</Text>
       <View style={styles.dailyGoal}>
         <Text style={[styles.jost]}>You've reached</Text>
         <Text style={[styles.museo]}>83%</Text>
