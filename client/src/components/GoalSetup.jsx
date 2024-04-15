@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, Image, Pressable, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AuthContext from '../context/AuthContext';
-import Loading from './Loading'
 import { LinearGradient } from 'expo-linear-gradient';
 import AppLoading from 'expo-app-loading';
 import axios from 'axios'
@@ -29,9 +28,9 @@ const GoalSetup = () => {
     screen_goal: 3,
     meditation_goal: 30,
     excercise_goal: 1,
-    screen_time: 3,
-    meditation_time: 30,
-    excercise_time: 1
+    screen_time: 0,
+    meditation_time: 0,
+    excercise_time: 0
   })
 
   let [fontsLoaded] = useFonts({
@@ -132,33 +131,6 @@ const GoalSetup = () => {
         </TouchableOpacity>
       </View>
     </View>
-
-    // <View style={styles.container}>
-    //   <LinearGradient colors={['#F0FDFF', '#8B9DFF']} style={styles.background} />
-    //   <Text style={[styles.title, styles.jost]}>Let's set up your goals</Text>
-    //   <View style={styles.boxes}>
-    //     <View style={styles.box}>
-    //       <Text style={[styles.time, styles.jost]}>Screen time:</Text>
-    //       <Text style={[styles.amount, styles.museo]}>3 <Text style={styles.unit}>hours</Text></Text>
-    //     </View>
-    //     <View style={styles.box}>
-    //       <Text style={[styles.time, styles.jost]}>Exercise time:</Text>
-    //       <Text style={[styles.amount, styles.museo]}>1 <Text style={styles.unit}>hour</Text></Text>
-    //     </View>
-    //     <View style={styles.box}>
-    //       <Text style={[styles.time, styles.jost]}>Meditation time:</Text>
-    //       <Text style={[styles.amount, styles.museo]}>30 <Text style={styles.unit}>mins</Text></Text>
-    //     </View>
-    //     <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 18 }}>
-    //       <Image source={icon} style={styles.icon} />
-    //     </View>
-    //   </View>
-    //   <View style={styles.buttonContainer}>
-    //     <View style={styles.button}>
-    //       <Text style={[styles.buttonText]}>Next</Text>
-    //     </View>
-    //   </View>
-    // </View>
   );
 }
 

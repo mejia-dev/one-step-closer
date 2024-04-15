@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Landing from './Landing.jsx';
 import GoalSetup from './GoalSetup';
 import GoalUpdate from './GoalUpdate.jsx'
-import ProgressGraph from './ProgressGraph';
 import NotificationSetup from './NotificationSetup';
 import Dashboard from './Dashboard';
 import AuthContext from '../context/AuthContext';
@@ -24,10 +22,10 @@ export default function AuthNavigator() {
       <Stack.Navigator>
         {user ? (
           <>
-            {/* <Stack.Screen name="Dashboard" component={Dashboard}
-              options={{ headerShown: false }} /> */}
-            {/* <Stack.Screen name="Goal Setup" component={GoalSetup}
-              options={{ headerShown: false }} /> */}
+            <Stack.Screen name="Dashboard" component={Dashboard}
+              options={{ headerShown: false }} />
+            <Stack.Screen name="Goal Setup" component={GoalSetup}
+              options={{ headerShown: false }} />
             <Stack.Screen name="Goal Update" component={GoalUpdate}
               options={{ headerShown: false }} />
             <Stack.Screen name="Notification Setup" component={NotificationSetup}

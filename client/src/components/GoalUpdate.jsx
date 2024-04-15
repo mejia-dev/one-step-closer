@@ -31,10 +31,8 @@ const GoalUpdate = () => {
         const getData = async () => {
             try {
                 const userId = user.user_id
-                console.log(user)
                 const currentDate = new Date().toISOString().split('T')[0];
                 const res = await axios.get(`http://localhost:8000/?user_id=${userId}&date=${currentDate}`);
-                console.log(res.data)
                 setProgress(res.data)
             } catch (error) {
                 console.log("Error fetching user data", error)
@@ -53,8 +51,6 @@ const GoalUpdate = () => {
     if (!fontsLoaded) {
         return <AppLoading />;
     }
-
-    // let icon = require("../assets/img/plus-icon.png");
 
     const navigateToDashboard = () => {
         navigation.navigate('Dashboard');

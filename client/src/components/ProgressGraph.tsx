@@ -1,7 +1,9 @@
 import { View, Dimensions } from 'react-native'
 import { ProgressChart } from 'react-native-chart-kit'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import AuthContext from '../context/AuthContext'
+import AppLoading from 'expo-app-loading'
 
 interface GoalData {
     user: number,
@@ -17,10 +19,12 @@ interface GoalData {
 const ProgressGraph = () => {
     const [data, setData] = useState<GoalData>({} as GoalData)
 
+    let { user } = useContext(AuthContext);
+
     useEffect(() => {
         const getData = async () => {
             try {
-                const user_id = 1;
+                const user_id = user.user_id;
                 const currentDate = new Date().toISOString().split('T')[0];
                 const res = await axios.get(`http://localhost:8000/?user_id=${user_id}&date=${currentDate}`);
                 setData(res.data)
@@ -31,12 +35,6 @@ const ProgressGraph = () => {
 
         getData();
     }, [])
-
-    // const placeholderData = {
-    //     labels: ["Meditate", "Excercise", "Read"],
-    //     data: [0.4, 0.6, 0.8],
-    //     color: (opacity = 1) => `rgba(0, 54, 92, ${opacity})`,
-    // };
 
     const screenPercent = data.screen_time / data.screen_goal;
     const meditationPercent = data.meditation_time / data.meditation_goal;
@@ -49,12 +47,12 @@ const ProgressGraph = () => {
     }
 
     const chartConfig = {
-        backgroundGradientFrom: "none",
-        backgroundGradientTo: "none",
+        backgroundGradientFrom: "white",
+        backgroundGradientTo: "white",
         color: (opacity = 2) => `rgba(0, 88, 151, ${opacity})`,
-        strokeWidth: 2, // optional, default 3
+        strokeWidth: 2,
         barPercentage: 0.5,
-        useShadowColorFromDataset: false, // optional
+        useShadowColorFromDataset: false,
         contentInset: { top: 20, bottom: 20, left: 20, right: 20 }
     };
 

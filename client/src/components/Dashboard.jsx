@@ -1,7 +1,7 @@
 import ProgressGraph from "./ProgressGraph"
 import NavBar from './NavBar';
-
-import React from 'react';
+import AuthContext from '../context/AuthContext';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import AppLoading from 'expo-app-loading';
@@ -13,13 +13,15 @@ import {
 } from '@expo-google-fonts/museomoderno';
 import { Jost_400Regular } from '@expo-google-fonts/jost';
 
-const NotificationSetup = () => {
+const Dashboard = () => {
+
   let [fontsLoaded] = useFonts({
     MuseoModerno_600SemiBold,
     MuseoModerno_700Bold,
     MuseoModerno_800ExtraBold,
     Jost_400Regular
   });
+
   if (!fontsLoaded) {
     return <AppLoading />;
   }
@@ -27,7 +29,7 @@ const NotificationSetup = () => {
   return (
     <View style={styles.container}>
       <LinearGradient colors={['#F0FDFF', '#8B9DFF']} style={styles.background} />
-      <Text style={[styles.title, styles.jost]}>April 15, 2024</Text>
+      <Text style={[styles.title, styles.jost]}>April 15th, 2024</Text>
       <View style={styles.dailyGoal}>
         <Text style={[styles.jost]}>You've reached</Text>
         <Text style={[styles.museo]}>83%</Text>
@@ -42,7 +44,7 @@ const NotificationSetup = () => {
   );
 }
 
-export default NotificationSetup;
+export default Dashboard;
 
 const styles = StyleSheet.create({
   container: {
